@@ -1,0 +1,42 @@
+{% load static %}
+
+
+<section class="header-navbar">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="container-fluid px-5 mx-5">
+      <a href="#" class="navbar-brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="#" class="nav-item nav-link active">Home</a>
+          <a href="#" class="nav-item nav-link">About</a>
+          <a href="#" class="nav-item nav-link">Blog</a>
+          <a href="#" class="nav-item nav-link">Contact</a>
+
+        </div>
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              {{ request.user.first_name }} {{ request.user.last_name }}
+            </a>
+            <div class="dropdown-menu">
+              <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+              <a href="{% url 'update' %}" class="dropdown-item">Edit Profile</a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'signout' %}" class="dropdown-item">Logout</a>
+            </div>
+          </div>
+          {% else %}
+          <a href="{% url 'signup' %}" class="nav-item nav-link">Sign Up</a>
+          <a href="{% url 'signin' %}" class="nav-item nav-link">Sign In</a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </nav>
+</section>
